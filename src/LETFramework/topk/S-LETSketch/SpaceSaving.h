@@ -114,7 +114,6 @@ public:
             ptr1->bucket = buckets + i;
             ptr = ptr1;
         }
-        int t = 1;
     }
     void initial(const TopkPart* _refer)
     {

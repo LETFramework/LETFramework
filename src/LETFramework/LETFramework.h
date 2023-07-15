@@ -118,7 +118,7 @@ public:
     }
     double gsum_subset(double (*g)(double), const SubsetCheck* check,double real_sum) {
         double heavy_sketch_gsum = 0;
-        HashMap all_res = topk->query_all();//heavySketch_query_all();
+        HashMap all_res = topk->query_all();
         double sum = 0;
         for (auto p : all_res) {//[key, val]
             if ((*check)(p.first))

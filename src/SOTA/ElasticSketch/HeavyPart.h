@@ -2,7 +2,6 @@
 #define _HEAVYPART_H_
 
 #include "param.h"
-//#define USING_SIMD_ACCELERATION
 #include <immintrin.h>
 #include <emmintrin.h>
 #include <smmintrin.h>

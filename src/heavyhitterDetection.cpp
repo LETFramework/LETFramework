@@ -46,7 +46,6 @@ double gt_gsum_subset(double (*g)(double), const vector<pair<int, key_type>>& gt
     double sum = 0;
     for (auto p : gt) {// [val,key]
         if ((*check)(p.second)) {
-            // cout << "gt match " << key << ' ' << val << endl;
             sum += g(p.first);
         }
     }

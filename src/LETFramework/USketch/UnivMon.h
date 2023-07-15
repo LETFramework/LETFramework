@@ -9,7 +9,6 @@
 class USketchPart
 {
 public:
-    //static constexpr uint16_t k = 1000;
     typedef CountHeap<key_len> HeavyHitterDetector;
     HeavyHitterDetector** sketches;
     BOBHash32** hash;
@@ -27,12 +26,9 @@ public:
             return;
         int mem_for_sk = int(mem_in_bytes);
         int mem = int(mem_for_sk / level);
-        // cout << "mem " << mem_in_bytes << ' ' << mem_for_sk << ' ' << mem << endl;
         for (int i = 0; i < level; i++)
         {
             sketches[i] = new HeavyHitterDetector(*(_refer->sketches[i]));
-            // int hash_num = rand()% MAX_PRIME32;
-            // cout << "hash_num = " << rd_list[i] << endl;
             hash[i] = new BOBHash32(*_refer->hash[i]);
         }
     }
@@ -42,13 +38,10 @@ public:
             return;
         int mem_for_sk = int(mem_in_bytes);
         int mem = int(mem_for_sk / level);
-        // cout << "mem " << mem_in_bytes << ' ' << mem_for_sk << ' ' << mem << endl;
         vector<uint32_t> rd_list = BOBHash32::get_random_prime_index_list(level);
         for (int i = 0; i < level; i++)
         {
             sketches[i] = new HeavyHitterDetector((1 - gama) * mem, gama * mem, d);
-            // int hash_num = rand()% MAX_PRIME32;
-            // cout << "hash_num = " << rd_list[i] << endl;
             hash[i] = new BOBHash32(rd_list[i]);
         }
     }
@@ -75,7 +68,6 @@ public:
         for(int i=1; i<level; i++)
         {
             hash_val = hash[i]->run((const char*)key, key_len) % 2;
-            // cout << hash_val;
             if(hash_val)
             {
                 sketches[i]->insert(key, f);
@@ -85,7 +77,6 @@ public:
                 break;
             }
         }
-        // cout << endl;
     }
     double gsum(double (*g)(double))
     {
@@ -106,11 +97,6 @@ public:
                 coe = (i == level - 1) ? 1 : (1 - 2*hash_val);
                 Y[i] += coe*g(double(kv.second));
             }
-            // cout << "level " << i << ", len = " << result.size() << ", Y = " << Y[i] << endl;
-        }
-        if (Y[0] < 0)
-        {
-            int t = 1;
         }
         return Y[0];
     }
@@ -136,11 +122,6 @@ public:
                 coe = (i == level - 1) ? 1 : (1 - 2 * hash_val);
                 Y[i] += coe * g(double(kv.second));
             }
-            // cout << "level " << i << ", len = " << result.size() << ", Y = " << Y[i] << endl;
-        }
-        if (Y[0] < 0)
-        {
-            int t = 1;
         }
         return Y[0];
     }
@@ -169,7 +150,6 @@ public:
         ret.clear();
         for (auto & kv: results) {
             if (kv.second >= threshold) {
-//                results.erase(kv.first);
                 ret.emplace_back(make_pair(*(uint32_t *)(kv.first.c_str()), kv.second));
             }
         }
@@ -195,23 +175,13 @@ public:
             HeavyHitterDetector::join(*(x->sketches[i]), *(y->sketches[i]), *combine_sketch);
             for (auto p : mp) // [key,val]
             {
-                //double estimate1 = query(0, *p.first.c_str()), estimate2 = query(1, *p.first.c_str()), estimate = estimate1 + estimate2;
                 double estimate = combine_sketch->query((uint8_t*)p.first.c_str());
-                // cout << key << ' ' << val << endl;
-                /*if (estimate <= 0)
-                {
-                    continue;
-                }*/
+
                 hash_val = (i == level - 1) ? 1 : x->hash[i + 1]->run(p.first.c_str(), key_len) % 2;
                 coe = (i == level - 1) ? 1 : (1 - 2 * hash_val);
                 Y[i] += coe * g(double(estimate));
             }
-            // cout << "level " << i << ", size=" << mp.size() << ", Y = " << Y[i] << endl;
             delete combine_sketch;
-        }
-        if (Y[0] < 0)
-        {
-            int t = 1;
         }
         return Y[0];
     }
@@ -236,7 +206,6 @@ public:
             Y[i] = (i == level - 1) ? 0 : 2 * Y[i + 1];
             for (auto p : mp)//[key,val]
             {
-                // cout << key << ' ' << val << endl;
                 if (p.second <= 0)
                 {
                     continue;
@@ -245,11 +214,6 @@ public:
                 coe = (i == level - 1) ? 1 : (1 - 2 * hash_val);
                 Y[i] += coe * g(double(p.second));
             }
-            // cout << "level " << i << ", size=" << mp.size() << ", Y = " << Y[i] << endl;
-        }
-        if (Y[0] < 0)
-        {
-            int t = 1;
         }
         return Y[0];
     }

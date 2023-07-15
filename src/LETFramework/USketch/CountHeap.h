@@ -206,19 +206,6 @@ public:
 		delete ans;
 	}
 
-//    void get_top_k(uint16_t k, uint32_t * result) {
-//        VK * a = new VK[capacity];
-//        memcpy(a, heap, sizeof(heap));
-//        sort(a, a + capacity);
-//        int i;
-//        for (i = 0; i < k && i < capacity; ++i) {
-//            result[i] = a[capacity - 1 - i].second;
-//        }
-//        for (; i < k; ++i) {
-//            result[i] = 0;
-//        }
-//    }
-
 	void get_top_k_with_frequency(vector<KV> & result) {
 		result = vector<KV>(capacity);
 		VK * a = new VK[capacity];
