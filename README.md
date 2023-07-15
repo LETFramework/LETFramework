@@ -38,11 +38,11 @@ To accommodate a wider range of testing, you should add the following parameters
 
 1. `configFilePath`: configFile records the parameters of the LETFramework,including:
 
-   > 1. lambda: A float,the items whose frequencies are larger than a predefined threshold $\Lambda$ are defined as heavy hitter
-   > 2. total_mem: An integer, representing the memory size (in bytes) used by the LETFramework.
-   > 3. topk: A float , representing the memory ratio of the Top-k part
-   > 4. countSketch: A float, representing the memory ratio of the CountSketech **in USketch part**
-   > 5. d: An integer ranging from 1 to 10, representing the the number of arrays of the Count sketches in the USketch part
+   - `lambda`: A float,the items whose frequencies are larger than a predefined threshold $\Lambda$ are defined as heavy hitter
+   - `total_mem`: An integer, representing the memory size (in bytes) used by the LETFramework.
+   - `topk`: A float , representing the memory ratio of the Top-k part
+   - `countSketch`: A float, representing the memory ratio of the CountSketech **in USketch part**
+   - `d`: An integer ranging from 1 to 10, representing the number of arrays of the Count sketches in the USketch part
 
    Please refer to the "config.txt" file in the "/src" directory to write your configuration file that meets the requirements.
 2. `datasetPath`: The path of the dataset you want to run.
