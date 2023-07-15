@@ -1,0 +1,5 @@
+lambda=0.00005
+total_mem=1000000
+topk=0.6
+countSketch=0.9
+d=1
