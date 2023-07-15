@@ -31,7 +31,7 @@ You can use the following commands to build and then you can test the algorithms
 
 ```shell
 $ cd src
-$ ./make
+$ make
 ```
 
 To accommodate a wider range of testing, you should add the following parameters in sequence after the executable file:
