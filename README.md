@@ -7,8 +7,8 @@ Sketching algorithms are considered as promising solutions for approximate query
 ## About this repo
 
 - `dataset/`:The sample datasets extracted from the real-world datasets used in our experiments,including IP Trace Dataset(CAIDA)、Webdocs Dataset and Synthetic Dataset.
-- `src/`:LETFramework and other algorithms implemented on CPU
-
+- `CPU/`:LETFramework and other algorithms implemented in C++ on CPU
+- `Spark/`:LETFramework and other algorithms implemented in JAVA on Spark
 ## Requirements
 
 - cmake
@@ -61,3 +61,14 @@ To accommodate a wider range of testing, you should add the following parameters
    ### Output format
 
    Our program will print the statistics about the input dataset and the parameters of the candidate algorithms at the command-line interface.
+
+## What APIs does LETFramework supply
+The LETFramework offers the following APIs:
+1. `insert`:Inserting a user-specified number of keys into the LETFramework.
+2. `query`: Query the number of frequency of a specific key in the LETFramework.
+3. `getHeavyHitter`: reporting flows whose sizes are larger than a predefined threshold.
+4. `gsum`: Estimating G-sum $\sum_x g\left(f_x\right)$, where the function g is provided by the user.
+5. `gsumAdd`: Estimating G-sum $\sum_x g\left(f_A(x)+f_B(x)\right)$, where the function g is provided by the user and 
+$f_A(x)$ is the frequency of item x in the data stream A, and $f_B(x)$ is the frequency of item x in the data stream B.
+6. `gsumMul`: Estimating G-sum $\sum_x g\left(f_A(x)*f_B(x)\right)$, where the function g is provided by the user and 
+$f_A(x)$ is the frequency of item x in the data stream A, and $f_B(x)$ is the frequency of item x in the data stream B.

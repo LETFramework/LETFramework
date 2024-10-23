@@ -1,0 +1,7 @@
+lambda=0.00005
+topk=0.6
+countSketch=0.9
+d=5
+mem_start=100000
+mem_stop=1000000
+mem_step=200000
